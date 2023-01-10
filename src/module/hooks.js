@@ -1,6 +1,6 @@
 import {PortraitBox} from "./portrait-box.js";
 import {CONST} from "./const.js";
-import {registerSettings} from "./settings.js ";
+import {registerSettings} from "./settings.js";
 
 export const initializeHooks = () => {
     Hooks.once("init", async () => {
@@ -14,16 +14,16 @@ export const initializeHooks = () => {
         await ui.portraitBox.render(true);
     });
 
-    Hooks.on("hoverToken", (token, hovered) => {
+    Hooks.on("hoverToken", foundry.utils.debounce((token, hovered) => {
         if(hovered) {
             ui.portraitBox.show(token);
         }
         else {
             ui.portraitBox.hide();
         }
-    });
+    }, 250));
 
-    Hooks.on("renderSettingsConfig", (app, html, data) => {
+    Hooks.on("renderSettingsConfig", (app, html) => {
         let name, colour;
         name = `${CONST.MODULE_NAME}.labelBgColor`;
         colour = game.settings.get(CONST.MODULE_NAME, "labelBgColor");
