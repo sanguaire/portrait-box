@@ -62,7 +62,7 @@ export class PortraitBox extends Application {
         return this;
     }
 
-    show(token) {
+    show = token => {
         const imgPath = token.document.actorLink
             ? game.settings.get(CONST.MODULE_NAME, "usedImgForBound") === "a" ?
                 token.actor.img :
@@ -73,15 +73,20 @@ export class PortraitBox extends Application {
 
         const anchor = game.settings.get(CONST.MODULE_NAME, "anchor");
 
-        if(anchor==="b" || anchor ==="c") {
-            ui.sidebar._collapsed
+        if(!ui.sidebar._collapsed && (anchor==="b" || anchor ==="c")) {
+            const horizontalMargin = game.settings.get(CONST.MODULE_NAME, "horizontal");
+            this.element.css("right", `calc(${horizontalMargin} + var(--sidebar-width))`);
+        } else {
+            this.element.css("right", "");
         }
 
         this.element.find(".portrait").css("background-image", `url(${imgPath}`);
         this.element.fadeIn(1000);
-    }
+    };
 
-    hide() {
+    hide = () => {
         this.element.fadeOut(500);
-    }
+
+    };
+
 }
