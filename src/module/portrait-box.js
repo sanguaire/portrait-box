@@ -29,10 +29,13 @@ export class PortraitBox extends Application {
     async render(force = false, options = {}) {
         await super._render(force, options);
 
+        const mask = game.settings.get(CONST.MODULE_NAME, "mask");
+
+        this.element.css("--pb-font-size", game.settings.get(CONST.MODULE_NAME, "font-size"));
+        this.element.css("--pb-font", game.settings.get(CONST.MODULE_NAME, "font"));
         this.element.css("--pb-width", game.settings.get(CONST.MODULE_NAME, "width") + "px");
         this.element.css("--pb-height", game.settings.get(CONST.MODULE_NAME, "height") + "px");
-        this.element.css("--pb-mask", `url(../../../${game.settings.get(CONST.MODULE_NAME, "mask")})`);
-        this.element.css("--pb-font-size", game.settings.get(CONST.MODULE_NAME, "font-size"));
+        this.element.css("--pb-mask", mask !== "" ? `url(../../../${mask})` : "none");
         this.element.css("--pb-horizontal", game.settings.get(CONST.MODULE_NAME, "horizontal"));
         this.element.css("--pb-vertical", game.settings.get(CONST.MODULE_NAME, "vertical"));
         this.element.css("--pb-label-bg-color", game.settings.get(CONST.MODULE_NAME, "labelBgColor"));
@@ -54,14 +57,27 @@ export class PortraitBox extends Application {
                 break;
         }
 
-        //this.element.css("display", "none");
         this.element.hide();
 
         return this;
     }
 
     show(token) {
-        this.element.find(".portrait").css("background-image", `url(${token.actor.img}`);
+        const imgPath = token.document.actorLink
+            ? game.settings.get(CONST.MODULE_NAME, "usedImgForBound") === "a" ?
+                token.actor.img :
+                token.document.texture.src
+            : game.settings.get(CONST.MODULE_NAME, "usedImgForUnbound") === "a" ?
+                token.actor.img :
+                token.document.texture.src;
+
+        const anchor = game.settings.get(CONST.MODULE_NAME, "anchor");
+
+        if(anchor==="b" || anchor ==="c") {
+            ui.sidebar._collapsed
+        }
+
+        this.element.find(".portrait").css("background-image", `url(${imgPath}`);
         this.element.fadeIn(1000);
     }
 

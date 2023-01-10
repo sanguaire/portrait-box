@@ -8,6 +8,7 @@
     --pb-height: "300px";
     --pb-mask: url(../assets/mask-wiggle.svg);
     --pb-label-bg-color: "#FFFFFF";
+    --pb-font: "Signika";
 
     position: fixed;
     display: flex;
@@ -60,6 +61,7 @@
 }
 
 #portrait-box .label {
+    font-family: var(--pb-font);
     position: relative;
     color: var(--pb-font-color);
     background-color: var(--pb-label-bg-color);
