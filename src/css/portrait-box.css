@@ -1,0 +1,69 @@
+/*noinspection CssUnresolvedCustomProperty*/
+#portrait-box {
+    --pb-horizontal: calc(var(--sidebar-width) + 1em);
+    --pb-vertical: 0.5em;
+    --pb-font-size: var(--font-size-18);
+    --pb-font-color: "#000000";
+    --pb-width: "300px";
+    --pb-height: "300px";
+    --pb-mask: url(../assets/mask-wiggle.svg);
+    --pb-label-bg-color: "#FFFFFF";
+
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: var(--pb-font-size);
+    z-index: calc(var(--z-index-ui) + 10);
+
+    width: var(--pb-width);
+    height: var(--pb-height);
+
+    filter: drop-shadow(0.15rem 0.15rem 0.20rem rgba(0, 0, 0, 0.5));
+}
+
+#portrait-box.top-left {
+    left: var(--pb-horizontal);
+    top: var(--pb-vertical);
+}
+
+#portrait-box.top-right {
+    right: var(--pb-horizontal);
+    top: var(--pb-vertical);
+}
+
+#portrait-box.bottom-left {
+    left: var(--pb-horizontal);
+    bottom: var(--pb-vertical);
+}
+
+#portrait-box.bottom-right {
+    right: var(--pb-horizontal);
+    bottom: var(--pb-vertical);
+}
+
+
+#portrait-box .portrait {
+    position: absolute;
+    top:0;
+    left: 0;
+    width: var(--pb-width);
+    height: var(--pb-height);
+    background-position: 50% 50%;
+    background-size: contain;
+
+    -webkit-mask-position: 50% 50%;
+    -webkit-mask-size: 90%;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-image: var(--pb-mask);
+}
+
+#portrait-box .label {
+    position: relative;
+    color: var(--pb-font-color);
+    background-color: var(--pb-label-bg-color);
+    padding:0.1em;
+    bottom: 0.5em;
+    text-align: center;
+}

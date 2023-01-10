@@ -1,0 +1,42 @@
+{
+  "id": "portrait-box",
+  "title": "Portrait box",
+  "description": "Show a portrait box on token hover",
+  "version": "0.1.0",
+  "compatibility": {
+    "minimum": "10",
+    "verified": "10.291",
+    "maximum": "10"
+  },
+  "authors": [
+    {
+      "name": "André Kurth",
+      "discord": "Sanguaire#7321"
+    }
+  ],
+  "relationships": {
+    "systems": [],
+    "requires": []
+  },
+  "esmodules": [
+    "module/main.js"
+  ],
+  "styles": [
+    "/css/portrait-box.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    },
+    {
+      "lang": "de",
+      "name": "English",
+      "path": "lang/de.json"
+    }
+  ],
+  "url": "https://github.com/sanguaire/portrait-box",
+  "manifest": "https://github.com/cswendrowski/FoundryVTT-Encounter-Builder/releases/v0.1.0/module.json",
+  "download": "https://github.com/cswendrowski/FoundryVTT-Encounter-Builder/releases/download/v0.1.0/portrait-box.zip"
+}
