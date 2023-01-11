@@ -25,6 +25,8 @@
     "mask-hint": "Maske für das Bild",
     "out-animation": "Ausblendanimation",
     "out-animation-hint": "Animation, die beim Ausblenden verwendet wird. Danke an https://animate.style/",
+    "show-label": "Beschriftung anzeigen",
+    "show-label-hint": "",
     "token-img": "Tokenbild",
     "top-left": "Oben-Links",
     "top-right": "Oben-Rechts",

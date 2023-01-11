@@ -76,6 +76,11 @@ export class PortraitBox extends Application {
         const anchor = game.settings.get(CONST.MODULE_NAME, "anchor");
         const animation = game.settings.get(CONST.MODULE_NAME, "animation");
         const horizontalMargin = game.settings.get(CONST.MODULE_NAME, "horizontal");
+        const showLabel = game.settings.get(CONST.MODULE_NAME, "showLabel");
+
+        if(!showLabel) {
+            this.element.find(".label").css("display", "none");
+        }
 
         if(!ui.sidebar._collapsed && (anchor==="b" || anchor ==="c")) {
             this.element.css("right", `calc(${horizontalMargin} + var(--sidebar-width))`);

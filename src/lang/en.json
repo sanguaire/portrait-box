@@ -25,6 +25,8 @@
     "mask-hint": "Mask of the image",
     "out-animation": "Hide animation",
     "out-animation-hint": "Animation used when fading out. Thanks to https://animate.style/",
+    "show-label": "Show label",
+    "show-label-hint": "",
     "token-img": "Token image",
     "top-left": "Top-Left",
     "top-right": "Top-right",

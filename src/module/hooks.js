@@ -11,7 +11,7 @@ export const initializeHooks = () => {
         }
     };
 
-    const debouncedHover = foundry.utils.debounce(showOrHide, 500);
+    const debouncedHover = foundry.utils.debounce(showOrHide, 250);
 
     Hooks.once("init", async () => {
         console.log(`${CONST.MODULE_NAME} | Initializing`);
