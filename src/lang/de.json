@@ -1,3 +1,36 @@
 {
-  "pb": ""
+  "pb": {
+    "actor-img": "Akteurbild",
+    "anchor": "Anker",
+    "anchor-hint": "Auf welche Position beziehen sich die Abstände.",
+    "animation": "Anzeigeanimation",
+    "animation-hint": "Animation, die beim einblenden verwendet wird. Danke an https://animate.style/",
+    "bottom-left": "Unten-Links",
+    "bottom-right": "Unten-Rechts",
+    "font": "Schriftart",
+    "font-hint": "Schriftart der Beschriftung",
+    "font-size": "Schriftgröße",
+    "font-size-hint": "Schriftgröße der Beschriftung",
+    "for-bound": "Bild für verbundene Tokens",
+    "for-bound-hint": "",
+    "for-unbound": "Bild für ungebundene Tokens",
+    "for-unbound-hint": "",
+    "height": "Höhe",
+    "height-hint": "",
+    "horizontal": "Horizontaler Abstand",
+    "horizontal-hint": "",
+    "label-bg-color": "Hintergundfarbe Beschrifung",
+    "label-bg-color-hint": "",
+    "mask": "Maskierung",
+    "mask-hint": "Maske für das Bild",
+    "out-animation": "Ausblendanimation",
+    "out-animation-hint": "Animation, die beim Ausblenden verwendet wird. Danke an https://animate.style/",
+    "token-img": "Tokenbild",
+    "top-left": "Oben-Links",
+    "top-right": "Oben-Rechts",
+    "vertical": "Vertikaler Abstand",
+    "vertical-hint": "",
+    "width": "Breite",
+    "width-hint": ""
+  }
 }

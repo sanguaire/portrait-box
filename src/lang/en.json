@@ -1,3 +1,36 @@
 {
-  "pb": ""
+  "pb": {
+    "actor-img": "Actor image",
+    "anchor": "Anchor",
+    "anchor-hint": "To which position do the distances refer.",
+    "animation": "Show animation",
+    "animation-hint": "Animation that is used when fading in. Thanks to https://animate.style/",
+    "bottom-left": "Bottom-Left",
+    "bottom-right": "Bottom-Right",
+    "font": "Font",
+    "font-hint": "Font for the label",
+    "font-size": "Font size",
+    "font-size-hint": "Font size of the label",
+    "for-bound": "Image for linked tokens",
+    "for-bound-hint": "",
+    "for-unbound": "Image for unlinked tokens",
+    "for-unbound-hint": "",
+    "height": "Height",
+    "height-hint": "",
+    "horizontal": "Horizontal margin",
+    "horizontal-hint": "",
+    "label-bg-color": "Background color of Label",
+    "label-bg-color-hint": "",
+    "mask": "Mask",
+    "mask-hint": "Mask of the image",
+    "out-animation": "Hide animation",
+    "out-animation-hint": "Animation used when fading out. Thanks to https://animate.style/",
+    "token-img": "Token image",
+    "top-left": "Top-Left",
+    "top-right": "Top-right",
+    "vertical": "Vertical margin",
+    "vertical-hint": "",
+    "width": "Width",
+    "width-hint": ""
+  }
 }

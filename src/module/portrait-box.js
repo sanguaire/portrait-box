@@ -42,27 +42,29 @@ export class PortraitBox extends Application {
 
         const anchor = game.settings.get(CONST.MODULE_NAME, "anchor");
 
-        switch (anchor) {
-            case "a":
-                this.element.addClass("top-left");
-                break;
-            case "b":
-                this.element.addClass("top-right");
-                break;
-            case "c":
-                this.element.addClass("bottom-right");
-                break;
-            case "d":
-                this.element.addClass("bottom-left");
-                break;
-        }
+        this.element.attr("class", this.getAnchorClass(anchor));
 
         this.element.hide();
 
         return this;
     }
 
+    getAnchorClass = (anchorId) => {
+        switch (anchorId) {
+            case "a":
+                return "top-left";
+            case "b":
+                return "top-right";
+            case "c":
+               return "bottom-right";
+            case "d":
+                return "bottom-left";
+        }
+    }
+
     show = token => {
+        console.log(`${CONST.MODULE_NAME} show box`);
+
         const imgPath = token.document.actorLink
             ? game.settings.get(CONST.MODULE_NAME, "usedImgForBound") === "a" ?
                 token.actor.img :
@@ -72,21 +74,51 @@ export class PortraitBox extends Application {
                 token.document.texture.src;
 
         const anchor = game.settings.get(CONST.MODULE_NAME, "anchor");
+        const animation = game.settings.get(CONST.MODULE_NAME, "animation");
+        const horizontalMargin = game.settings.get(CONST.MODULE_NAME, "horizontal");
 
         if(!ui.sidebar._collapsed && (anchor==="b" || anchor ==="c")) {
-            const horizontalMargin = game.settings.get(CONST.MODULE_NAME, "horizontal");
             this.element.css("right", `calc(${horizontalMargin} + var(--sidebar-width))`);
         } else {
-            this.element.css("right", "");
+            this.element.css("right", `calc(${horizontalMargin} + 32px)`);
         }
 
         this.element.find(".portrait").css("background-image", `url(${imgPath}`);
-        this.element.fadeIn(1000);
+        this.element.find(".label").html(token.actor.name);
+        this.element.show();
+
+        this.element.css("display", "");
+        this.element.attr("class", this.getAnchorClass(anchor))
+
+        if(animation !== "noAnimation") {
+            this.element.on("webkitAnimationEnd oAnimationEnd msAnimationEnd animationend", function (){
+                $(this).removeClass(`animated ${animation}`);
+                $(this).off("webkitAnimationEnd oAnimationEnd msAnimationEnd animationend");
+            });
+
+            this.element.addClass(`animated ${animation}`);
+        }
     };
 
     hide = () => {
-        this.element.fadeOut(500);
+        console.log(`${CONST.MODULE_NAME} hide box`);
 
+        const anchor = game.settings.get(CONST.MODULE_NAME, "anchor");
+        const animation = game.settings.get(CONST.MODULE_NAME, "outAnimation");
+
+        this.element.css("display", "");
+        this.element.attr("class", this.getAnchorClass(anchor))
+
+        if(animation !== "no-animation") {
+            this.element.on("webkitAnimationEnd oAnimationEnd msAnimationEnd animationend", function (){
+                $(this).removeClass(`animated ${animation}`);
+                $(this).hide();
+                $(this).off("webkitAnimationEnd oAnimationEnd msAnimationEnd animationend");
+            });
+
+            this.element.addClass(`animated ${animation}`);
+        } else {
+            this.element.hide();
+        }
     };
-
 }

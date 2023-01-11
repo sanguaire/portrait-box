@@ -1,4 +1,5 @@
 import {CONST} from "./const.js";
+
 export const registerSettings = () => {
 
     game.settings.register(CONST.MODULE_NAME, "font", {
@@ -9,7 +10,7 @@ export const registerSettings = () => {
         default: "Signika",
         config: true,
         requiresReload: true,
-        
+
     });
 
     game.settings.register(CONST.MODULE_NAME, "font-size", {
@@ -20,7 +21,7 @@ export const registerSettings = () => {
         default: "var(--font-size-18)",
         config: true,
         requiresReload: true,
-        
+
     });
 
     game.settings.register(CONST.MODULE_NAME, "labelBgColor", {
@@ -31,7 +32,7 @@ export const registerSettings = () => {
         default: "#FFFFFF",
         config: true,
         requiresReload: true,
-        
+
     });
 
     game.settings.register(CONST.MODULE_NAME, "height", {
@@ -42,7 +43,7 @@ export const registerSettings = () => {
         default: "500",
         config: true,
         requiresReload: true,
-        
+
     });
 
     game.settings.register(CONST.MODULE_NAME, "width", {
@@ -53,7 +54,7 @@ export const registerSettings = () => {
         default: "300",
         config: true,
         requiresReload: true,
-        
+
     });
 
     game.settings.register(CONST.MODULE_NAME, "mask", {
@@ -65,7 +66,7 @@ export const registerSettings = () => {
         config: true,
         filePicker: "image",
         requiresReload: true,
-        
+
     });
 
     game.settings.register(CONST.MODULE_NAME, "anchor", {
@@ -75,14 +76,14 @@ export const registerSettings = () => {
         type: String,
         default: "a",
         choices: {
-          "a": game.i18n.localize("pb.top-left"),
-          "b": game.i18n.localize("pb.top-right"),
-          "c": game.i18n.localize("pb.bottom-right"),
-          "d": game.i18n.localize("pb.bottom-left")
+            "a": game.i18n.localize("pb.top-left"),
+            "b": game.i18n.localize("pb.top-right"),
+            "c": game.i18n.localize("pb.bottom-right"),
+            "d": game.i18n.localize("pb.bottom-left")
         },
         config: true,
         requiresReload: true,
-        
+
     });
 
     game.settings.register(CONST.MODULE_NAME, "horizontal", {
@@ -93,7 +94,7 @@ export const registerSettings = () => {
         default: "5em",
         config: true,
         requiresReload: true,
-        
+
     });
 
     game.settings.register(CONST.MODULE_NAME, "vertical", {
@@ -104,7 +105,7 @@ export const registerSettings = () => {
         default: "5em",
         config: true,
         requiresReload: true,
-        
+
     });
 
     game.settings.register(CONST.MODULE_NAME, "usedImgForBound", {
@@ -134,4 +135,25 @@ export const registerSettings = () => {
         config: true,
         requiresReload: true,
     });
+
+    game.settings.register(CONST.MODULE_NAME, "animation", {
+        name: game.i18n.localize("pb.animation"),
+        hint: game.i18n.localize("pb.animation-hint"),
+        scope: "client",
+        type: String,
+        default: "heartBeat",
+        choices: CONST.ANIMATIONS,
+        config: true,
+    });
+
+    game.settings.register(CONST.MODULE_NAME, "outAnimation", {
+        name: game.i18n.localize("pb.out-animation"),
+        hint: game.i18n.localize("pb.out-animation-hint"),
+        scope: "client",
+        type: String,
+        default: "no-animation",
+        choices: CONST.ANIMATIONS,
+        config: true,
+    });
+
 };

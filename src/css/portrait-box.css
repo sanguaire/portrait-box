@@ -1,3 +1,5 @@
+@import "animate-css-4.1.1/animate.css";
+
 /*noinspection CssUnresolvedCustomProperty*/
 #portrait-box {
     --pb-horizontal: calc(var(--sidebar-width) + 1em);
@@ -8,6 +10,7 @@
     --pb-height: "300px";
     --pb-mask: url(../assets/mask-wiggle.svg);
     --pb-label-bg-color: "#FFFFFF";
+    --pb-label-padding: 0.3em;
     --pb-font: "Signika";
 
     position: fixed;
@@ -44,28 +47,30 @@
     bottom: var(--pb-vertical);
 }
 
-
 #portrait-box .portrait {
-    position: absolute;
-    top:0;
-    left: 0;
+    display: block;
+    position: relative;
     width: var(--pb-width);
     height: var(--pb-height);
     background-position: 50% 50%;
     background-size: contain;
+    background-repeat: no-repeat;
 
     -webkit-mask-position: 50% 50%;
-    -webkit-mask-size: 90%;
+    -webkit-mask-size: 100% 100%;
     -webkit-mask-repeat: no-repeat;
     -webkit-mask-image: var(--pb-mask);
 }
 
 #portrait-box .label {
+    display: block;
     font-family: var(--pb-font);
-    position: relative;
+    position: absolute;
     color: var(--pb-font-color);
     background-color: var(--pb-label-bg-color);
-    padding:0.1em;
+    padding: var(--pb-label-padding);
     bottom: 0.5em;
     text-align: center;
+
+    box-shadow: inset 0 0 var(--pb-label-padding) rgba(0, 0 , 0, 50% );
 }
