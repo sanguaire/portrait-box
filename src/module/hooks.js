@@ -1,18 +1,11 @@
 import {PortraitBox} from "./portrait-box.js";
 import {CONST} from "./const.js";
 import {registerSettings} from "./settings.js";
+import {fromEvent, Subject} from "../libs/rxjs/esm/es2015/rxjs.min.js";
+
+export const hoverObservable = new Subject();
 
 export const initializeHooks = () => {
-    const showOrHide = (token, hovered) => {
-        if (hovered === true && !token.destroyd) {
-            ui.portraitBox.show(token);
-        } else {
-            ui.portraitBox.hide();
-        }
-    };
-
-    const debouncedHover = foundry.utils.debounce(showOrHide, 250);
-
     Hooks.once("init", async () => {
         console.log(`${CONST.MODULE_NAME} | Initializing`);
         registerSettings();
@@ -24,7 +17,7 @@ export const initializeHooks = () => {
         await ui.portraitBox.render(true);
     });
 
-    Hooks.on("hoverToken", debouncedHover);
+    Hooks.on("hoverToken", (token, hovered) => hoverObservable.next({token, hovered}));
 
     Hooks.on("renderSettingsConfig", (app, html) => {
         let name, colour;

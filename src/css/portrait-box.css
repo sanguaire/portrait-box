@@ -50,14 +50,14 @@
 #portrait-box .portrait {
     display: block;
     position: relative;
-    width: var(--pb-width);
-    height: var(--pb-height);
+    width: 100%;
+    height: 100%;
     background-position: 50% 50%;
     background-size: contain;
     background-repeat: no-repeat;
 
     -webkit-mask-position: 50% 50%;
-    -webkit-mask-size: 100% 100%;
+    -webkit-mask-size: auto;
     -webkit-mask-repeat: no-repeat;
     -webkit-mask-image: var(--pb-mask);
 }

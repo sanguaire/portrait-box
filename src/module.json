@@ -19,8 +19,10 @@
     "requires": []
   },
   "esmodules": [
-    "module/main.js"
+    "module/main.js",
+    "libs/rxjs/esm/es2015/rxjs.min.js"
   ],
+  "scripts": [],
   "styles": [
     "/css/portrait-box.css"
   ],

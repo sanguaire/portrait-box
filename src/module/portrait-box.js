@@ -1,6 +1,8 @@
 import {CONST} from "./const.js";
+import {hoverObservable} from "./hooks.js";
 
 export class PortraitBox extends Application {
+
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
             left: 0,
@@ -22,13 +24,19 @@ export class PortraitBox extends Application {
         //html.hide().fadeIn(200);
     }
 
-    getData(options={}) {
+    activateListeners(html) {
+        const anchor = game.settings.get(CONST.MODULE_NAME, "anchor");
+        const that = this;
+    }
+
+    getData(options = {}) {
         return super.getData(options);
     }
 
     async render(force = false, options = {}) {
         await super._render(force, options);
 
+        const that = this;
         const mask = game.settings.get(CONST.MODULE_NAME, "mask");
 
         this.element.css("--pb-font-size", game.settings.get(CONST.MODULE_NAME, "font-size"));
@@ -46,6 +54,24 @@ export class PortraitBox extends Application {
 
         this.element.hide();
 
+
+
+        hoverObservable.subscribe({
+            next(x) {
+                if (x.hovered) {
+                    that.show(x.token);
+                } else {
+                    that.hide();
+                }
+            },
+            error(err) {
+                console.error(`${CONST.MODULE_NAME} ${err}`);
+            },
+            complete() {
+                console.log(`${CONST.MODULE_NAME} done`);
+            },
+
+        })
         return this;
     }
 
@@ -56,7 +82,7 @@ export class PortraitBox extends Application {
             case "b":
                 return "top-right";
             case "c":
-               return "bottom-right";
+                return "bottom-right";
             case "d":
                 return "bottom-left";
         }
@@ -78,11 +104,11 @@ export class PortraitBox extends Application {
         const horizontalMargin = game.settings.get(CONST.MODULE_NAME, "horizontal");
         const showLabel = game.settings.get(CONST.MODULE_NAME, "showLabel");
 
-        if(!showLabel) {
+        if (!showLabel) {
             this.element.find(".label").css("display", "none");
         }
 
-        if(!ui.sidebar._collapsed && (anchor==="b" || anchor ==="c")) {
+        if (!ui.sidebar._collapsed && (anchor === "b" || anchor === "c")) {
             this.element.css("right", `calc(${horizontalMargin} + var(--sidebar-width))`);
         } else {
             this.element.css("right", `calc(${horizontalMargin} + 32px)`);
@@ -95,12 +121,7 @@ export class PortraitBox extends Application {
         this.element.css("display", "");
         this.element.attr("class", this.getAnchorClass(anchor))
 
-        if(animation !== "noAnimation") {
-            this.element.on("webkitAnimationEnd oAnimationEnd msAnimationEnd animationend", function (){
-                $(this).removeClass(`animated ${animation}`);
-                $(this).off("webkitAnimationEnd oAnimationEnd msAnimationEnd animationend");
-            });
-
+        if(animation !== "no-animation") {
             this.element.addClass(`animated ${animation}`);
         }
     };
@@ -115,15 +136,7 @@ export class PortraitBox extends Application {
         this.element.attr("class", this.getAnchorClass(anchor))
 
         if(animation !== "no-animation") {
-            this.element.on("webkitAnimationEnd oAnimationEnd msAnimationEnd animationend", function (){
-                $(this).removeClass(`animated ${animation}`);
-                $(this).hide();
-                $(this).off("webkitAnimationEnd oAnimationEnd msAnimationEnd animationend");
-            });
-
             this.element.addClass(`animated ${animation}`);
-        } else {
-            this.element.hide();
         }
     };
 }
