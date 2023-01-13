@@ -21,12 +21,10 @@ export class PortraitBox extends Application {
 
         this._element = html;
 
-        //html.hide().fadeIn(200);
     }
 
     activateListeners(html) {
-        const anchor = game.settings.get(CONST.MODULE_NAME, "anchor");
-        const that = this;
+
     }
 
     getData(options = {}) {
