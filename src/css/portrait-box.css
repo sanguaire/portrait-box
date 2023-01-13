@@ -12,6 +12,8 @@
     --pb-label-bg-color: "#FFFFFF";
     --pb-label-padding: 0.3em;
     --pb-font: "Signika";
+    --pb-border: none;
+    --pb-label-vertical: 0.5em;
 
     position: fixed;
     display: flex;
@@ -47,6 +49,24 @@
     bottom: var(--pb-vertical);
 }
 
+#portrait-box .border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background-image: var(--pb-border);
+    background-position: 50% 50%;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    -webkit-mask-position: 50% 50%;
+    -webkit-mask-size: auto;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-image: var(--pb-mask);
+}
+
 #portrait-box .portrait {
     display: block;
     position: relative;
@@ -69,7 +89,7 @@
     color: var(--pb-font-color);
     background-color: var(--pb-label-bg-color);
     padding: var(--pb-label-padding);
-    bottom: 0.5em;
+    bottom: var(--pb-label-vertical);
     text-align: center;
 
     box-shadow: inset 0 0 var(--pb-label-padding) rgba(0, 0 , 0, 50% );

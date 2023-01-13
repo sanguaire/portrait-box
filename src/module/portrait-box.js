@@ -36,6 +36,7 @@ export class PortraitBox extends Application {
 
         const that = this;
         const mask = game.settings.get(CONST.MODULE_NAME, "mask");
+        const border = game.settings.get(CONST.MODULE_NAME, "border");
 
         this.element.css("--pb-font-size", game.settings.get(CONST.MODULE_NAME, "font-size"));
         this.element.css("--pb-font", game.settings.get(CONST.MODULE_NAME, "font"));
@@ -45,14 +46,14 @@ export class PortraitBox extends Application {
         this.element.css("--pb-horizontal", game.settings.get(CONST.MODULE_NAME, "horizontal"));
         this.element.css("--pb-vertical", game.settings.get(CONST.MODULE_NAME, "vertical"));
         this.element.css("--pb-label-bg-color", game.settings.get(CONST.MODULE_NAME, "labelBgColor"));
+        this.element.css("--pb-border", border !== "" ? `url(../../../${border})` : "none");
+        this.element.css("--pb-label-vertical", game.settings.get(CONST.MODULE_NAME, "labelVertical"));
 
         const anchor = game.settings.get(CONST.MODULE_NAME, "anchor");
 
         this.element.attr("class", this.getAnchorClass(anchor));
 
         this.element.hide();
-
-
 
         hoverObservable.subscribe({
             next(x) {
@@ -87,8 +88,6 @@ export class PortraitBox extends Application {
     }
 
     show = token => {
-        console.log(`${CONST.MODULE_NAME} show box`);
-
         const imgPath = token.document.actorLink
             ? game.settings.get(CONST.MODULE_NAME, "usedImgForBound") === "a" ?
                 token.actor.img :
@@ -125,8 +124,6 @@ export class PortraitBox extends Application {
     };
 
     hide = () => {
-        console.log(`${CONST.MODULE_NAME} hide box`);
-
         const anchor = game.settings.get(CONST.MODULE_NAME, "anchor");
         const animation = game.settings.get(CONST.MODULE_NAME, "outAnimation");
 

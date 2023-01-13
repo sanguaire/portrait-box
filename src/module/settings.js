@@ -35,6 +35,17 @@ export const registerSettings = () => {
 
     });
 
+    game.settings.register(CONST.MODULE_NAME, "labelVertical", {
+        name: game.i18n.localize("pb.label-vertical"),
+        hint: game.i18n.localize("pb.label-vertical-hint"),
+        scope: "world",
+        type: String,
+        default: "0.5em",
+        config: true,
+        requiresReload: true,
+
+    });
+
     game.settings.register(CONST.MODULE_NAME, "labelBgColor", {
         name: game.i18n.localize("pb.label-bg-color"),
         hint: game.i18n.localize("pb.label-bg-color-hint"),
@@ -74,6 +85,18 @@ export const registerSettings = () => {
         scope: "world",
         type: String,
         default: `modules/${CONST.MODULE_NAME}/assets/mask-wiggle.svg`,
+        config: true,
+        filePicker: "image",
+        requiresReload: true,
+
+    });
+
+    game.settings.register(CONST.MODULE_NAME, "border", {
+        name: game.i18n.localize("pb.border"),
+        hint: game.i18n.localize("pb.border-hint"),
+        scope: "world",
+        type: String,
+        default: ``,
         config: true,
         filePicker: "image",
         requiresReload: true,
