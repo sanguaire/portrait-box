@@ -13,6 +13,6 @@ You can animate the fade-in and fade-out.
 
 ![sc-3.png](screenshots%2Fsc-3.png)
 
-[animation.webm](screenshots%2Fanimation.webm)
+[animation.webm](https://user-images.githubusercontent.com/10399481/212316733-ade6e984-22a8-4f8f-952c-4d625c7ececb.webm)
 
 For more information about possible animations see https://animate.css
