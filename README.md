@@ -6,7 +6,7 @@ You can change the shape of the portrait box via svg mask.
 
 ![sc-2.png](screenshots%2Fsc-2.png)
 ![sc-1.png](screenshots%2Fsc-1.png)
-# Postion
+# Position
 The position of the box can be set to top-left, top-right, bottom-right, bottom-left. You can change the distance from horizontal and vertical border via css string (var's and calc allowed).
 # Animate fade-in / fade-out
 You can animate the fade-in and fade-out. 
