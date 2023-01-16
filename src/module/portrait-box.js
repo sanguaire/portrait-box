@@ -42,6 +42,7 @@ export class PortraitBox extends Application {
         const that = this;
         const mask = this.settings.mask;
         const border = this.settings.border;
+        const background = this.settings.background
 
         this.element.css("--pb-font-size", this.settings.fontSize);
         this.element.css("--pb-font", this.settings.font);
@@ -53,6 +54,7 @@ export class PortraitBox extends Application {
         this.element.css("--pb-label-bg-color", this.settings.labelBgColor);
         this.element.css("--pb-border", border !== "" ? `url(../../../${border})` : "none");
         this.element.css("--pb-label-vertical", this.settings.labelVertical);
+        this.element.css("--pb-background", background !== "" ? `url(../../../${background})` : "none");
         this.element.attr("class", this.getAnchorClass(this.settings.anchor));
 
         this.element.hide();
@@ -107,6 +109,9 @@ export class PortraitBox extends Application {
         this.settings.showPc = getSetting("showForPc");
         this.settings.showLinkedGm = getSetting("showForLinkedGmToken");
         this.settings.showUnlinkedGm = getSetting("showForUnlinkedGmToken");
+        this.settings.animationDuration = getSetting("animationDuration");
+        this.settings.outAnimationDuration = getSetting("outAnimationDuration");
+        this.settings.background = getSetting("background");
     }
 
     show = token => {
@@ -138,6 +143,10 @@ export class PortraitBox extends Application {
         this.element.css("display", "");
         this.element.attr("class", this.getAnchorClass(this.settings.anchor))
 
+        if(this.settings.animationDuration !== "") {
+            this.element.css("--animate-duration", this.settings.animationDuration);
+        }
+
         if(this.settings.animation !== "no-animation") {
             this.element.addClass(`animate__animated ${this.settings.animation}`);
         }
@@ -149,6 +158,10 @@ export class PortraitBox extends Application {
 
         this.element.css("display", "");
         this.element.attr("class", this.getAnchorClass(this.settings.anchor))
+
+        if(this.settings.outAnimationDuration !== "") {
+            this.element.css("--animate-duration", this.settings.outAnimationDuration);
+        }
 
         if(this.settings.outAnimation !== "no-animation") {
             this.element.addClass(`animate__animated ${this.settings.outAnimation}`);

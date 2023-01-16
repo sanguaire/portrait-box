@@ -103,6 +103,18 @@ export const registerSettings = () => {
 
     });
 
+    game.settings.register(CONST.MODULE_NAME, "background", {
+        name: game.i18n.localize("pb.background"),
+        hint: game.i18n.localize("pb.background-hint"),
+        scope: "world",
+        type: String,
+        default: ``,
+        config: true,
+        filePicker: "image",
+        requiresReload: true,
+
+    });
+
     game.settings.register(CONST.MODULE_NAME, "anchor", {
         name: game.i18n.localize("pb.anchor"),
         hint: game.i18n.localize("pb.anchor-hint"),
@@ -211,6 +223,15 @@ export const registerSettings = () => {
         requiresReload: true,
     });
 
+    game.settings.register(CONST.MODULE_NAME, "animationDuration", {
+        name: game.i18n.localize("pb.animation-duration"),
+        scope: "world",
+        type: String,
+        default: "1s",
+        config: true,
+        requiresReload: true,
+    });
+
     game.settings.register(CONST.MODULE_NAME, "outAnimation", {
         name: game.i18n.localize("pb.out-animation"),
         hint: game.i18n.localize("pb.out-animation-hint"),
@@ -218,6 +239,15 @@ export const registerSettings = () => {
         type: String,
         default: "rotateOutDownRight",
         choices: CONST.ANIMATIONS,
+        config: true,
+        requiresReload: true,
+    });
+
+    game.settings.register(CONST.MODULE_NAME, "outAnimationDuration", {
+        name: game.i18n.localize("pb.out-animation-duration"),
+        scope: "world",
+        type: String,
+        default: "1s",
         config: true,
         requiresReload: true,
     });
