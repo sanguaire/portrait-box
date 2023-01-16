@@ -24,7 +24,7 @@ export const registerSettings = () => {
 
     });
 
-    game.settings.register(CONST.MODULE_NAME, "font-size", {
+    game.settings.register(CONST.MODULE_NAME, "fontSize", {
         name: game.i18n.localize("pb.font-size"),
         hint: game.i18n.localize("pb.font-size-hint"),
         scope: "world",
