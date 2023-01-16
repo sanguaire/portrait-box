@@ -97,7 +97,7 @@ export class PortraitBox extends Application {
                 token.document.texture.src;
 
         const anchor = game.settings.get(CONST.MODULE_NAME, "anchor");
-        const animation = game.settings.get(CONST.MODULE_NAME, "animation");
+        const animation = CONST.ANIMATIONS[game.settings.get(CONST.MODULE_NAME, "animation")];
         const horizontalMargin = game.settings.get(CONST.MODULE_NAME, "horizontal");
         const showLabel = game.settings.get(CONST.MODULE_NAME, "showLabel");
 
@@ -119,19 +119,19 @@ export class PortraitBox extends Application {
         this.element.attr("class", this.getAnchorClass(anchor))
 
         if(animation !== "no-animation") {
-            this.element.addClass(`animated ${animation}`);
+            this.element.addClass(`animate__animated ${animation}`);
         }
     };
 
     hide = () => {
         const anchor = game.settings.get(CONST.MODULE_NAME, "anchor");
-        const animation = game.settings.get(CONST.MODULE_NAME, "outAnimation");
+        const animation = CONST.ANIMATIONS[game.settings.get(CONST.MODULE_NAME, "outAnimation")];
 
         this.element.css("display", "");
         this.element.attr("class", this.getAnchorClass(anchor))
 
         if(animation !== "no-animation") {
-            this.element.addClass(`animated ${animation}`);
+            this.element.addClass(`animate__animated ${animation}`);
         }
     };
 }
