@@ -1,7 +1,10 @@
 import {CONST} from "./const.js";
 import {hoverObservable} from "./hooks.js";
+import {getSetting} from "./utils.js";
 
 export class PortraitBox extends Application {
+
+    settings = {};
 
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
@@ -34,24 +37,23 @@ export class PortraitBox extends Application {
     async render(force = false, options = {}) {
         await super._render(force, options);
 
+        this.#initSettings();
+
         const that = this;
-        const mask = game.settings.get(CONST.MODULE_NAME, "mask");
-        const border = game.settings.get(CONST.MODULE_NAME, "border");
+        const mask = this.settings.mask;
+        const border = this.settings.border;
 
-        this.element.css("--pb-font-size", game.settings.get(CONST.MODULE_NAME, "font-size"));
-        this.element.css("--pb-font", game.settings.get(CONST.MODULE_NAME, "font"));
-        this.element.css("--pb-width", game.settings.get(CONST.MODULE_NAME, "width") + "px");
-        this.element.css("--pb-height", game.settings.get(CONST.MODULE_NAME, "height") + "px");
+        this.element.css("--pb-font-size", this.settings.fontSize);
+        this.element.css("--pb-font", this.settings.font);
+        this.element.css("--pb-width", this.settings.width + "px");
+        this.element.css("--pb-height", this.settings.heigth + "px");
         this.element.css("--pb-mask", mask !== "" ? `url(../../../${mask})` : "none");
-        this.element.css("--pb-horizontal", game.settings.get(CONST.MODULE_NAME, "horizontal"));
-        this.element.css("--pb-vertical", game.settings.get(CONST.MODULE_NAME, "vertical"));
-        this.element.css("--pb-label-bg-color", game.settings.get(CONST.MODULE_NAME, "labelBgColor"));
+        this.element.css("--pb-horizontal", this.settings.horizontal);
+        this.element.css("--pb-vertical", this.settings.vertical);
+        this.element.css("--pb-label-bg-color", this.settings.labelBgColor);
         this.element.css("--pb-border", border !== "" ? `url(../../../${border})` : "none");
-        this.element.css("--pb-label-vertical", game.settings.get(CONST.MODULE_NAME, "labelVertical"));
-
-        const anchor = game.settings.get(CONST.MODULE_NAME, "anchor");
-
-        this.element.attr("class", this.getAnchorClass(anchor));
+        this.element.css("--pb-label-vertical", this.settings.labelVertical);
+        this.element.attr("class", this.getAnchorClass(this.settings.anchor));
 
         this.element.hide();
 
@@ -60,7 +62,7 @@ export class PortraitBox extends Application {
                 if (x.hovered) {
                     that.show(x.token);
                 } else {
-                    that.hide();
+                    that.hide(x.token);
                 }
             },
             error(err) {
@@ -87,8 +89,31 @@ export class PortraitBox extends Application {
         }
     }
 
+    #initSettings = () => {
+        this.settings.anchor = getSetting("anchor")
+        this.settings.animation = CONST.ANIMATIONS[getSetting("animation")];
+        this.settings.outAnimation = CONST.ANIMATIONS[getSetting("outAnimation")];
+        this.settings.horizontal = getSetting("horizontal");
+        this.settings.vertical = getSetting("vertical");
+        this.settings.showLabel = getSetting("showLabel");
+        this.settings.mask = getSetting("mask");
+        this.settings.border = getSetting("border");
+        this.settings.fontSize = getSetting("fontSize");
+        this.settings.font = getSetting("font");
+        this.settings.width = getSetting("width");
+        this.settings.heigth = getSetting("height");
+        this.settings.labelBgColor = getSetting("labelBgColor");
+        this.settings.labelVertical = getSetting("labelVertical");
+        this.settings.showPc = getSetting("showForPc");
+        this.settings.showLinkedGm = getSetting("showForLinkedGmToken");
+        this.settings.showUnlinkedGm = getSetting("showForUnlinkedGmToken");
+    }
+
     show = token => {
-        const imgPath = token.document.actorLink
+        if(!this.shouldShown(token))
+            return;
+
+        const imgPath = token.document.isLinked
             ? game.settings.get(CONST.MODULE_NAME, "usedImgForBound") === "a" ?
                 token.actor.img :
                 token.document.texture.src
@@ -96,19 +121,14 @@ export class PortraitBox extends Application {
                 token.actor.img :
                 token.document.texture.src;
 
-        const anchor = game.settings.get(CONST.MODULE_NAME, "anchor");
-        const animation = CONST.ANIMATIONS[game.settings.get(CONST.MODULE_NAME, "animation")];
-        const horizontalMargin = game.settings.get(CONST.MODULE_NAME, "horizontal");
-        const showLabel = game.settings.get(CONST.MODULE_NAME, "showLabel");
-
-        if (!showLabel) {
+        if (!this.settings.showLabel) {
             this.element.find(".label").css("display", "none");
         }
 
-        if (!ui.sidebar._collapsed && (anchor === "b" || anchor === "c")) {
-            this.element.css("right", `calc(${horizontalMargin} + var(--sidebar-width))`);
+        if (!ui.sidebar._collapsed && (this.settings.anchor === "b" || this.settings.anchor === "c")) {
+            this.element.css("right", `calc(${this.settings.horizontal} + var(--sidebar-width))`);
         } else {
-            this.element.css("right", `calc(${horizontalMargin} + 32px)`);
+            this.element.css("right", `calc(${this.settings.horizontal} + 32px)`);
         }
 
         this.element.find(".portrait").css("background-image", `url(${imgPath}`);
@@ -116,22 +136,28 @@ export class PortraitBox extends Application {
         this.element.show();
 
         this.element.css("display", "");
-        this.element.attr("class", this.getAnchorClass(anchor))
+        this.element.attr("class", this.getAnchorClass(this.settings.anchor))
 
-        if(animation !== "no-animation") {
-            this.element.addClass(`animate__animated ${animation}`);
+        if(this.settings.animation !== "no-animation") {
+            this.element.addClass(`animate__animated ${this.settings.animation}`);
         }
     };
 
-    hide = () => {
-        const anchor = game.settings.get(CONST.MODULE_NAME, "anchor");
-        const animation = CONST.ANIMATIONS[game.settings.get(CONST.MODULE_NAME, "outAnimation")];
+    hide = (token) => {
+        if(!this.shouldShown(token))
+            return;
 
         this.element.css("display", "");
-        this.element.attr("class", this.getAnchorClass(anchor))
+        this.element.attr("class", this.getAnchorClass(this.settings.anchor))
 
-        if(animation !== "no-animation") {
-            this.element.addClass(`animate__animated ${animation}`);
+        if(this.settings.outAnimation !== "no-animation") {
+            this.element.addClass(`animate__animated ${this.settings.outAnimation}`);
         }
+    };
+
+    shouldShown = (token) => {
+        return (this.settings.showPc && token.document.hasPlayerOwner) ||
+            (this.settings.showLinkedGm && !token.document.hasPlayerOwner && token.document.isLinked) ||
+            (this.settings.showUnlinkedGm && !token.document.hasPlayerOwner && !token.document.isLinked);
     };
 }

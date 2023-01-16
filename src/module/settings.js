@@ -170,6 +170,36 @@ export const registerSettings = () => {
         requiresReload: true,
     });
 
+    game.settings.register(CONST.MODULE_NAME, "showForPc", {
+        name: game.i18n.localize("pb.show-for-pc"),
+        hint: game.i18n.localize("pb.show-for-pc-hint"),
+        scope: "world",
+        type: Boolean,
+        default: true,
+        config: true,
+        requiresReload: true,
+    });
+
+    game.settings.register(CONST.MODULE_NAME, "showForLinkedGmToken", {
+        name: game.i18n.localize("pb.show-for-linked-gm-token"),
+        hint: game.i18n.localize("pb.show-for-linked-gm-token-hint"),
+        scope: "world",
+        type: Boolean,
+        default: true,
+        config: true,
+        requiresReload: true,
+    });
+
+    game.settings.register(CONST.MODULE_NAME, "showForUnlinkedGmToken", {
+        name: game.i18n.localize("pb.show-for-unlinked-gm-token"),
+        hint: game.i18n.localize("pb.show-for-unlinked-gm-token-hint"),
+        scope: "world",
+        type: Boolean,
+        default: true,
+        config: true,
+        requiresReload: true,
+    });
+
     game.settings.register(CONST.MODULE_NAME, "animation", {
         name: game.i18n.localize("pb.animation"),
         hint: game.i18n.localize("pb.animation-hint"),
