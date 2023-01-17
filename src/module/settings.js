@@ -79,6 +79,16 @@ export const registerSettings = () => {
 
     });
 
+    game.settings.register(CONST.MODULE_NAME, "imageFilter", {
+        name: game.i18n.localize("pb.image-filter"),
+        hint: game.i18n.localize("pb.image-filter-hint"),
+        scope: "world",
+        type: String,
+        default: "",
+        config: true,
+        requiresReload: true,
+    });
+
     game.settings.register(CONST.MODULE_NAME, "mask", {
         name: game.i18n.localize("pb.mask"),
         hint: game.i18n.localize("pb.mask-hint"),
@@ -112,7 +122,16 @@ export const registerSettings = () => {
         config: true,
         filePicker: "image",
         requiresReload: true,
+    });
 
+    game.settings.register(CONST.MODULE_NAME, "backgroundFilter", {
+        name: game.i18n.localize("pb.background-filter"),
+        hint: game.i18n.localize("pb.background-filter-hint"),
+        scope: "world",
+        type: String,
+        default: "",
+        config: true,
+        requiresReload: true,
     });
 
     game.settings.register(CONST.MODULE_NAME, "anchor", {

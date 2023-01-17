@@ -47,6 +47,10 @@
     "vertical": "Vertical margin",
     "vertical-hint": "",
     "width": "Width",
-    "width-hint": ""
+    "width-hint": "",
+    "image-filter": "Image filter",
+    "image-filter-hint": "CSS filter applied to the token/actor image.",
+    "background-filter": "Background filter",
+    "background-filter-hint": "CSS filter applied to the background image."
   }
 }

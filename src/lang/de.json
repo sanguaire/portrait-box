@@ -47,6 +47,10 @@
     "vertical": "Vertikaler Abstand",
     "vertical-hint": "",
     "width": "Breite",
-    "width-hint": ""
+    "width-hint": "",
+    "image-filter": "Bildfilter",
+    "image-filter-hint": "CSS-Filter der auf das Token-/Akteur-Bild angewendet wird.",
+    "background-filter": "Hintergrundfilter",
+    "background-filter-hint": "CSS-Filter der auf das Hintergrundbild angewendet wird."
   }
 }

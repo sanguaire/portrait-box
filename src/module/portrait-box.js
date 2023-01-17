@@ -4,7 +4,8 @@ import {getSetting} from "./utils.js";
 
 export class PortraitBox extends Application {
 
-    settings = {};
+    settings = {
+    };
 
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
@@ -38,26 +39,9 @@ export class PortraitBox extends Application {
         await super._render(force, options);
 
         this.#initSettings();
+        this.#initCssVariables();
 
         const that = this;
-        const mask = this.settings.mask;
-        const border = this.settings.border;
-        const background = this.settings.background
-
-        this.element.css("--pb-font-size", this.settings.fontSize);
-        this.element.css("--pb-font", this.settings.font);
-        this.element.css("--pb-width", this.settings.width + "px");
-        this.element.css("--pb-height", this.settings.heigth + "px");
-        this.element.css("--pb-mask", mask !== "" ? `url(../../../${mask})` : "none");
-        this.element.css("--pb-horizontal", this.settings.horizontal);
-        this.element.css("--pb-vertical", this.settings.vertical);
-        this.element.css("--pb-label-bg-color", this.settings.labelBgColor);
-        this.element.css("--pb-border", border !== "" ? `url(../../../${border})` : "none");
-        this.element.css("--pb-label-vertical", this.settings.labelVertical);
-        this.element.css("--pb-background", background !== "" ? `url(../../../${background})` : "none");
-        this.element.attr("class", this.getAnchorClass(this.settings.anchor));
-
-        this.element.hide();
 
         hoverObservable.subscribe({
             next(x) {
@@ -75,20 +59,9 @@ export class PortraitBox extends Application {
             },
 
         })
-        return this;
-    }
 
-    getAnchorClass = (anchorId) => {
-        switch (anchorId) {
-            case "a":
-                return "top-left";
-            case "b":
-                return "top-right";
-            case "c":
-                return "bottom-right";
-            case "d":
-                return "bottom-left";
-        }
+        this.element.hide();
+        return this;
     }
 
     #initSettings = () => {
@@ -112,7 +85,45 @@ export class PortraitBox extends Application {
         this.settings.animationDuration = getSetting("animationDuration");
         this.settings.outAnimationDuration = getSetting("outAnimationDuration");
         this.settings.background = getSetting("background");
+        this.settings.backgroundFilter = getSetting("backgroundFilter");
+        this.settings.imageFilter = getSetting("imageFilter");
     }
+
+    #initCssVariables() {
+        const mask = this.settings.mask;
+        const border = this.settings.border;
+        const background = this.settings.background
+
+        this.element.css("--pb-font-size", this.settings.fontSize);
+        this.element.css("--pb-font", this.settings.font);
+        this.element.css("--pb-width", this.settings.width + "px");
+        this.element.css("--pb-height", this.settings.heigth + "px");
+        this.element.css("--pb-mask", mask !== "" ? `url(../../../${mask})` : "none");
+        this.element.css("--pb-horizontal", this.settings.horizontal);
+        this.element.css("--pb-vertical", this.settings.vertical);
+        this.element.css("--pb-label-bg-color", this.settings.labelBgColor);
+        this.element.css("--pb-border", border !== "" ? `url(../../../${border})` : "none");
+        this.element.css("--pb-label-vertical", this.settings.labelVertical);
+        this.element.css("--pb-background", background !== "" ? `url(../../../${background})` : "none");
+        this.element.css("--pb-background-filter", this.settings.backgroundFilter);
+        this.element.css("--pb-image-filter", this.settings.imageFilter);
+        this.element.attr("class", this.getAnchorClass(this.settings.anchor));
+    }
+
+    getAnchorClass = (anchorId) => {
+        switch (anchorId) {
+            case "a":
+                return "top-left";
+            case "b":
+                return "top-right";
+            case "c":
+                return "bottom-right";
+            case "d":
+                return "bottom-left";
+        }
+    }
+
+
 
     show = token => {
         if(!this.shouldShown(token))

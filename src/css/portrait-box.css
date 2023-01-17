@@ -15,6 +15,8 @@
     --pb-border: none;
     --pb-background: none;
     --pb-label-vertical: 0.5em;
+    --pb-background-filter: "none";
+    --pb-image-filter: "none";
 
     position: fixed;
     display: flex;
@@ -81,6 +83,8 @@
     background-size: contain;
     background-repeat: no-repeat;
 
+    filter: var(--pb-background-filter);
+
     -webkit-mask-position: 50% 50%;
     -webkit-mask-size: auto;
     -webkit-mask-repeat: no-repeat;
@@ -95,6 +99,8 @@
     background-position: 50% 50%;
     background-size: contain;
     background-repeat: no-repeat;
+
+    filter: var(--pb-image-filter);
 
     -webkit-mask-position: 50% 50%;
     -webkit-mask-size: auto;
