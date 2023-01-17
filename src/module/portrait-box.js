@@ -4,8 +4,7 @@ import {getSetting} from "./utils.js";
 
 export class PortraitBox extends Application {
 
-    settings = {
-    };
+    settings = {};
 
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
@@ -57,17 +56,16 @@ export class PortraitBox extends Application {
             complete() {
                 console.log(`${CONST.MODULE_NAME} done`);
             },
+        });
 
-        })
-
-        this.element.hide();
+        this.element.css("opacity", "0.0");
         return this;
     }
 
     #initSettings = () => {
         this.settings.anchor = getSetting("anchor")
-        this.settings.animation = CONST.ANIMATIONS[getSetting("animation")];
-        this.settings.outAnimation = CONST.ANIMATIONS[getSetting("outAnimation")];
+        this.settings.animation = getSetting("animation");
+        this.settings.outAnimation = getSetting("outAnimation");
         this.settings.horizontal = getSetting("horizontal");
         this.settings.vertical = getSetting("vertical");
         this.settings.showLabel = getSetting("showLabel");
@@ -107,26 +105,11 @@ export class PortraitBox extends Application {
         this.element.css("--pb-background", background !== "" ? `url(../../../${background})` : "none");
         this.element.css("--pb-background-filter", this.settings.backgroundFilter);
         this.element.css("--pb-image-filter", this.settings.imageFilter);
-        this.element.attr("class", this.getAnchorClass(this.settings.anchor));
+        this.element.attr("class", CONST.ANCHOR_CLASSES[this.settings.anchor]);
     }
-
-    getAnchorClass = (anchorId) => {
-        switch (anchorId) {
-            case "a":
-                return "top-left";
-            case "b":
-                return "top-right";
-            case "c":
-                return "bottom-right";
-            case "d":
-                return "bottom-left";
-        }
-    }
-
-
 
     show = token => {
-        if(!this.shouldShown(token))
+        if (!this.shouldShown(token))
             return;
 
         const imgPath = token.document.isLinked
@@ -149,33 +132,35 @@ export class PortraitBox extends Application {
 
         this.element.find(".portrait").css("background-image", `url(${imgPath}`);
         this.element.find(".label").html(token.actor.name);
-        this.element.show();
 
-        this.element.css("display", "");
-        this.element.attr("class", this.getAnchorClass(this.settings.anchor))
+        this.element.attr("class", CONST.ANCHOR_CLASSES[this.settings.anchor]);
 
-        if(this.settings.animationDuration !== "") {
+        if (this.settings.animationDuration !== "") {
             this.element.css("--animate-duration", this.settings.animationDuration);
         }
 
-        if(this.settings.animation !== "no-animation") {
+        if (this.settings.animation !== "no-animation") {
             this.element.addClass(`animate__animated ${this.settings.animation}`);
+        } else {
+            this.element.css("opacity", "1.0");
         }
     };
 
     hide = (token) => {
-        if(!this.shouldShown(token))
+        if (!this.shouldShown(token))
             return;
 
-        this.element.css("display", "");
-        this.element.attr("class", this.getAnchorClass(this.settings.anchor))
+        this.element.find(".portrait").css("background-image", "");
+        this.element.attr("class", CONST.ANCHOR_CLASSES[this.settings.anchor])
 
-        if(this.settings.outAnimationDuration !== "") {
+        if (this.settings.outAnimationDuration !== "") {
             this.element.css("--animate-duration", this.settings.outAnimationDuration);
         }
 
-        if(this.settings.outAnimation !== "no-animation") {
+        if (this.settings.outAnimation !== "no-animation") {
             this.element.addClass(`animate__animated ${this.settings.outAnimation}`);
+        } else {
+            this.element.css("opacity", "0.0");
         }
     };
 
