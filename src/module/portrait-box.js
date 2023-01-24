@@ -150,7 +150,6 @@ export class PortraitBox extends Application {
         if (!this.shouldShown(token))
             return;
 
-        this.element.find(".portrait").css("background-image", "");
         this.element.attr("class", CONST.ANCHOR_CLASSES[this.settings.anchor])
 
         if (this.settings.outAnimationDuration !== "") {
@@ -162,6 +161,7 @@ export class PortraitBox extends Application {
         } else {
             this.element.css("opacity", "0.0");
         }
+
     };
 
     shouldShown = (token) => {
