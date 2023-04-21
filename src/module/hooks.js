@@ -29,6 +29,8 @@ export const initializeHooks = () => {
             .val(colour)
             .insertAfter($(`input[name="${name}"]`, html).addClass("color"));
     });
+
+    Hooks.on("destroyToken", (token) => hoverObservable.next({token, hovered: false}))
 }
 
 async function preloadTemplates() {
