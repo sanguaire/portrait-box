@@ -45,7 +45,9 @@ export class PortraitBox extends Application {
         hoverObservable.subscribe({
             next(x) {
                 if (x.hovered) {
-                    that.show(x.token);
+                    if(!x.token.document.getFlag(CONST.MODULE_NAME, "disabled")) {
+                        that.show(x.token);
+                    }
                 } else {
                     that.hide(x.token);
                 }
@@ -130,7 +132,7 @@ export class PortraitBox extends Application {
             this.element.css("right", `calc(${this.settings.horizontal} + 32px)`);
         }
 
-        this.element.find(".portrait").css("background-image", `url(${imgPath}`);
+        this.element.find(".portrait").css("background-image", `url("${imgPath}")`);
         this.element.find(".label").html(token.actor.name);
 
         this.element.attr("class", CONST.ANCHOR_CLASSES[this.settings.anchor]);
