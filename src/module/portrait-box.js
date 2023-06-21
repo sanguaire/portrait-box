@@ -167,8 +167,9 @@ export class PortraitBox extends Application {
     };
 
     shouldShown = (token) => {
-        return (this.settings.showPc && token.document.hasPlayerOwner) ||
+        return !token.document?.hidden && (
+            (this.settings.showPc && token.document.hasPlayerOwner) ||
             (this.settings.showLinkedGm && !token.document.hasPlayerOwner && token.document.isLinked) ||
-            (this.settings.showUnlinkedGm && !token.document.hasPlayerOwner && !token.document.isLinked);
+            (this.settings.showUnlinkedGm && !token.document.hasPlayerOwner && !token.document.isLinked));
     };
 }
