@@ -2,11 +2,11 @@
   "id": "portrait-box",
   "title": "Portrait box",
   "description": "Show a portrait box on token hover",
-  "version": "0.4.7",
+  "version": "0.4.8",
   "compatibility": {
     "minimum": "10",
     "verified": "10.291",
-    "maximum": "10"
+    "maximum": "11"
   },
   "authors": [
     {
@@ -39,6 +39,6 @@
     }
   ],
   "url": "https://github.com/sanguaire/portrait-box",
-  "manifest": "https://github.com/sanguaire/portrait-box/releases/download/v0.4.7/module.json",
-  "download": "https://github.com/sanguaire/portrait-box/releases/download/v0.4.7/portrait-box.zip"
+  "manifest": "https://github.com/sanguaire/portrait-box/releases/download/v0.4.8/module.json",
+  "download": "https://github.com/sanguaire/portrait-box/releases/download/v0.4.8/portrait-box.zip"
 }
