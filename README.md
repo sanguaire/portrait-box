@@ -16,3 +16,10 @@ You can animate the fade-in and fade-out.
 [animation.webm](https://user-images.githubusercontent.com/10399481/212316733-ade6e984-22a8-4f8f-952c-4d625c7ececb.webm)
 
 For more information about possible animations see https://animate.css
+
+# CSS-Filter
+You can add a CSS-Filter like sepia(0.8) to change the style of the displayed portraits globally.
+![sc-5.png](screenshots%2Fsc-5.png)
+![sc-4.png](screenshots%2Fsc-4.png)
+
+More information about CSS-Filter see https://www.w3schools.com/cssref/css3_pr_filter.php
